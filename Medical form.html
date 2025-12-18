@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prescription Form</title>
+</head>
+<body>
+  <h1>Medical Prescription Form</h1>
+
+  <!-- FORM -->
+  <form id="prescriptionForm">
+    <h2>Patient Information</h2>
+    <label for="name">Full Name:</label><br>
+    <input type="text" id="name" required><br><br>
+
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" required><br><br>
+
+    <label for="gender">Gender:</label><br>
+    <select id="gender" required>
+      <option value="">--Select--</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select><br><br>
+
+    <h2>Medical Details</h2>
+    <label for="symptoms">Symptoms:</label><br>
+    <textarea id="symptoms" rows="3" cols="40"></textarea><br><br>
+
+    <label for="diagnosis">Diagnosis:</label><br>
+    <textarea id="diagnosis" rows="3" cols="40"></textarea><br><br>
+
+    <label for="treatment">Prescription / Medicines:</label><br>
+    <textarea id="treatment" rows="3" cols="40"></textarea><br><br>
+
+    <h2>Doctor Details</h2>
+    <label for="doctor">Doctor's Name:</label><br>
+    <input type="text" id="doctor" required><br><br>
+
+    <label for="date">Date:</label><br>
+    <input type="date" id="date" required><br><br>
+
+    <button type="button" onclick="generateReport()">Generate Report</button>
+  </form>
+
+  <hr>
+
+  <!-- REPORT SECTION -->
+  <div id="reportSection" style="display:none;">
+    <h1>Generated Medical Report</h1>
+    <div id="reportContent"></div>
+  </div>
+
+  <script>
+    function generateReport() {
+      // Get form values
+      const name = document.getElementById('name').value;
+      const age = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const symptoms = document.getElementById('symptoms').value;
+      const diagnosis = document.getElementById('diagnosis').value;
+      const treatment = document.getElementById('treatment').value;
+      const doctor = document.getElementById('doctor').value;
+      const date = document.getElementById('date').value;
+
+      // Check if required fields are filled
+      if (!name || !age || !gender || !doctor || !date) {
+        alert("Please fill all required fields!");
+        return;
+      }
+
+      // Create the report
+      const reportHTML = `
+        <h2>Patient Information</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+
+        <h2>Medical Details</h2>
+        <p><strong>Symptoms:</strong> ${symptoms}</p>
+        <p><strong>Diagnosis:</strong> ${diagnosis}</p>
+        <p><strong>Prescription / Medicines:</strong> ${treatment}</p>
+
+        <h2>Doctor's Details</h2>
+        <p><strong>Doctor:</strong> ${doctor}</p>
+        <p><strong>Date:</strong> ${date}</p>
+      `;
+
+      // Show report below the form
+      document.getElementById('reportContent').innerHTML = reportHTML;
+      document.getElementById('reportSection').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
